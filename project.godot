@@ -1,0 +1,20 @@
+; Engine configuration file.
+; It's best edited using the Godot editor.
+; Only edit manually if you know what you are doing.
+
+config_version=5
+
+[application]
+config/name="neon-vortex"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[rendering]
+quality/driver/driver_name="vulkan"
+
+[input]
+move_left={"deadzone":0.2,"events":[{"device":0,"physical_keycode":65,"type":"key"}]}
+move_right={"deadzone":0.2,"events":[{"device":0,"physical_keycode":68,"type":"key"}]}
+move_up={"deadzone":0.2,"events":[{"device":0,"physical_keycode":87,"type":"key"}]}
+move_down={"deadzone":0.2,"events":[{"device":0,"physical_keycode":83,"type":"key"}]}

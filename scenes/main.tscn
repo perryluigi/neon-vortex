@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/building.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/building_spawner.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="4"]
+
+[sub_resource type="Environment" id="1"]
+background_mode = 1
+background_color = Color(0.01, 0.01, 0.03, 1)
+ambient_light_color = Color(0.02, 0.02, 0.05, 1)
+ambient_light_energy = 0.5
+
+[node name="Main" type="Node3D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4")
+player_path = NodePath("Player")
+score_label_path = NodePath("UI/ScoreLabel")
+game_over_root_path = NodePath("UI/GameOverOverlay")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("1")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+
+[node name="CameraRig" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 0.92, 0.39, 0, -0.39, 0.92, 0, 0, 0)
+current = true
+fov = 70.0
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="BuildingSpawner" type="Node3D" parent="."]
+script = ExtResource("3")
+building_scene = ExtResource("2")
+lanes_x = 7
+lane_spacing = 10.0
+min_height = 8.0
+max_height = 45.0
+row_spacing = 35.0
+spawn_distance_ahead = 300.0
+cleanup_distance_behind = 80.0
+empty_lane_probability = 0.3
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 20.0
+offset_top = 20.0
+text = "Score: 0"
+# Override font size for readability
+# In Godot 4 this uses theme_override_font_sizes
+theme_override_font_sizes/font_size = 24
+
+[node name="GameOverOverlay" type="Control" parent="UI"]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOverOverlay"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="GameOverLabel" type="Label" parent="UI/GameOverOverlay"]
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+offset_left = -150.0
+offset_top = -20.0
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UI/GameOverOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -20.0
+text = "Restart"
