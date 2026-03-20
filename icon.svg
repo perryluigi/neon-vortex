@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="128"
+   height="128"
+   viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="neonGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="50%" stop-color="#8a2be2"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" fill="#02020a" />
+  <rect x="18" y="26" width="28" height="76" rx="4" fill="url(#neonGradient)" />
+  <rect x="50" y="16" width="28" height="96" rx="4" fill="url(#neonGradient)" />
+  <rect x="82" y="34" width="28" height="68" rx="4" fill="url(#neonGradient)" />
+  <polygon points="64,20 54,44 74,44" fill="#00f0ff" />
+</svg>
